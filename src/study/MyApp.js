@@ -1,35 +1,30 @@
 import React from "react";
+import { useState } from "react";
 
-let isLoggedIn = 0;
 
-function AdminPanel() {
+export default function MyApp() {
+
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  function MyButton({ count, onClick }) {
+    return (
+      <button onClick={onClick}>
+        Clicked {count} times
+      </button>
+    );
+  }
+
   return (
-    <h2>나는 관리자</h2>
+    <div>
+      <h1>Counters that update separately</h1>
+      <MyButton count={count} onClick={handleClick} />
+      <MyButton count={count} onClick={handleClick} />
+    </div>
   );
 }
 
-function PartnerPanel() {
-  return (
-    <h2>나는 입점사</h2>
-  );
-}
 
-let content;
-
-// if (isLoggedIn) {
-//   content = <AdminPanel />;
-// } else {
-//   content = <PartnerPanel />;
-// }
-
-export default function Profile() {
-  return (
-    <>
-      {isLoggedIn ? (
-        <AdminPanel />
-      ) : (
-        <PartnerPanel />
-      )}
-    </>
-  );
-}
